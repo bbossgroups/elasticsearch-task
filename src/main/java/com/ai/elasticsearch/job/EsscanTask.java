@@ -34,8 +34,7 @@ public class EsscanTask {
     private String getHeader(String user,String password) {
         String auth = user+":"+password;
         byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
-        String authHeader = "Basic " + new String(encodedAuth);
-        return authHeader;
+        return "Basic " + new String(encodedAuth);
     }
     public void scanIndex(){
        if(elasticUrl == null){
@@ -47,7 +46,7 @@ public class EsscanTask {
            //获取所有的索引信息
 
             String data = HttpRequestUtil.httpGetforString(queryIndicesUrl,head);
-            System.out.println(data);
+            logger.debug(data);
 
             if(SimpleStringUtil.isNotEmpty(data)){
                 Date deadLine = TimeUtil.addDates(new Date(),-elasticDataLivetime);
@@ -56,21 +55,19 @@ public class EsscanTask {
                     ESIndice deadESIndice = indices.get(i);
                     String deleteIndiceUrl = elasticUrl + "/" + deadESIndice.getIndex() + "?pretty";
                     try {
+                    	//删除过期的索引数据
                        String res = HttpRequestUtil.httpDelete(deleteIndiceUrl, head);
-                        logger.warn("deleteIndiceUrl:"+deleteIndiceUrl+","+res);
+                        logger.debug("deleteIndiceUrl:"+deleteIndiceUrl+","+res);
                     }
                     catch (Exception e) {
-                        //logger.warn("elasticUrl:"+deleteIndiceUrl,e);
-                        logger.warn(e.getMessage());
+                        logger.error(e.getMessage());
                     }
                 }
             }
 
-            //删除过期的索引数据
-//            List<ESIndice> indices = SimpleStringUtil.json2ObjectWithType(data,new JsonTypeReference<List<ESIndice>>(){});
-//            HttpRequestUtil.httpDelete(elasticUrl+"/");
+            
         } catch (Exception e) {
-            logger.warn("elasticUrl:"+queryIndicesUrl,e);
+            logger.error("elasticUrl:"+queryIndicesUrl,e);
         }
     }
     public List<ESIndice> extractIndice(String data,Date deadLine) throws IOException {
@@ -87,7 +84,6 @@ public class EsscanTask {
                 i ++;
                 continue;
             }
-            String[] indice = line.split(" ");
             StringBuilder token = new StringBuilder();
             ESIndice esIndice = new ESIndice();
 
@@ -113,15 +109,7 @@ public class EsscanTask {
                             break;
                         case 2:
                             esIndice.setIndex(token.toString());
-                            int dsplit = esIndice.getIndex().lastIndexOf('-');
-
-                            try {
-                                String date = esIndice.getIndex().substring(dsplit+1);
-                                esIndice.setGenDate(format.parse(date));
-
-                            } catch (Exception e) {
-
-                            }
+                            putGendate(  esIndice,  format);
                             token.setLength(0);
                             k ++;
                             break;
@@ -171,12 +159,23 @@ public class EsscanTask {
             if(esIndice.getGenDate() != null && esIndice.getGenDate().before(deadLine)){
                 indices.add(esIndice);
             }
-            token = null;
+//            token = null;
 
         }
         return indices;
 
 
+    }
+    private void putGendate(ESIndice esIndice,SimpleDateFormat format){
+    	int dsplit = esIndice.getIndex().lastIndexOf('-');
+
+        try {
+            String date = esIndice.getIndex().substring(dsplit+1);
+            esIndice.setGenDate(format.parse(date));
+
+        } catch (Exception e) {
+
+        }
     }
     public String getDateformat() {
         return dateformat;
