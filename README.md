@@ -23,7 +23,7 @@ elastic.dateformat=yyyy.MM.dd
 gradle releaseVersion
 
 ## 运行作业
-执行成功后，在build/distributions目录下会生成可以允许的zip包，解压后启动和运行quartz作业
+gradle构建成功后，在build/distributions目录下会生成可以运行的zip包，解压后启动和运行quartz作业即可：
 
 
 linux：
