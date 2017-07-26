@@ -18,7 +18,7 @@ elastic.crontime=0/10 * * * * ?
 elastic.dateformat=yyyy.MM.dd
 
 # 构建部署
-前提：安装和配置好最新的gradle版本，下载源码，在源码根目录命令行下执行：
+前提：安装和配置好最新的gradle版本，下载源码
 ## 利用gradle构建发布版本
 gradle releaseVersion
 
