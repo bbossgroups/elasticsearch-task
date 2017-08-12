@@ -73,7 +73,9 @@ configure(allprojects) { project ->
 		 maven {
 	        url "http://maven.aliyun.com/nexus/content/groups/public"
 	    }
-		
+		maven {
+			url "https://artifacts.elastic.co/maven"
+		}
 		mavenCentral()
 
 	}
@@ -116,6 +118,7 @@ configure(allprojects) { project ->
 	dependencies {
 		testCompile 'junit:junit:4.12'
 		//compile 'net.sf.json-lib:json-lib:2.4-jdk15'
+		//compile 'org.elasticsearch.client:x-pack-transport:5.4.2'
 		compile(
 
 				[group: 'com.bbossgroups', name: 'bboss-schedule', version: "${bboss_version}", transitive: true],
