@@ -58,14 +58,14 @@ public class EsscanTask {
                 List<ESIndice> indices = extractIndice(data,deadLine);
                 for(int i = 0; indices != null && i < indices.size(); i ++){
                     ESIndice deadESIndice = indices.get(i);
-                    String deleteIndiceUrl = elasticUrl + "/" + deadESIndice.getIndex() + "?pretty";
+                    String deleteIndiceUrl = elasticUrl + "/" + java.net.URLEncoder.encode(deadESIndice.getIndex(),"UTF-8") + "?pretty";
                     try {
                     	//删除过期的索引数据
                        String res = HttpRequestUtil.httpDelete(deleteIndiceUrl, head);
                         logger.debug("deleteIndiceUrl:"+deleteIndiceUrl+","+res);
                     }
                     catch (Exception e) {
-                        logger.error(e.getMessage());
+                        logger.error(e.getMessage(),e);
                     }
                 }
             }

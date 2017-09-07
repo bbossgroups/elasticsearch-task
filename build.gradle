@@ -146,13 +146,16 @@ configure(allprojects) { project ->
 	task copyRTJarFiles(type: Copy,dependsOn:'copyJarFiles'){
 		from configurations.runtime - configurations.compile
 		into 'build/dist'
+		rename ("bboss-rt-${bboss_version}.jar", "${project.name}-${bboss_version}.jar")
 	}
 	task copyToolFiles(type: Copy ,dependsOn:'copyRTJarFiles')  {
 		from ('runfiles')
 				{
 					expand(
-							bboss_version:"${bboss_version}"
-					)
+							bboss_version:"${bboss_version}",
+							project:"${project.name}",
+                        	vm:"-Xms512m -Xmx512m -Xmn256m -XX:PermSize=128M -XX:MaxPermSize=256M"
+						)
 
 				}
 		filteringCharset = 'UTF-8'
