@@ -1,56 +1,61 @@
 package com.ai.elasticsearch.job;
 
-import com.frameworkset.util.SimpleStringUtil;
-import org.apache.commons.codec.binary.Base64;
-import org.frameworkset.spi.remote.http.HttpRequestUtil;
-import org.frameworkset.util.TimeUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
-import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.frameworkset.elasticsearch.ElasticSearchHelper;
+import org.frameworkset.elasticsearch.client.ClientUtil;
+import org.frameworkset.util.TimeUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.frameworkset.util.SimpleStringUtil;
 
 public class EsscanTask {
     private static Logger logger = LoggerFactory.getLogger(EsscanTask.class);
     private String dateformat = "yyyy.MM.dd";
-    private String elasticUser,elasticPassword;
-    private String queryIndicesUrl;
-    private String elasticUrl;
+//    private String elasticUser,elasticPassword;
+//    private String queryIndicesUrl;
+//    private String elasticUrl;
     private  int elasticDataLivetime = 30;
-    private Map<String,String> head = new HashMap<>();
+    private ClientUtil esclient;
+//    private Map<String,String> head = new HashMap<>();
     public void init(){
         //Authorization
-        if(!SimpleStringUtil.isEmpty(elasticUser))
-            head.put("Authorization",getHeader(  elasticUser,  elasticPassword) );
-        if(elasticUrl != null){
-            queryIndicesUrl = elasticUrl+"/_cat/indices?v";
-        }
+//        if(!SimpleStringUtil.isEmpty(elasticUser))
+//            head.put("Authorization",getHeader(  elasticUser,  elasticPassword) );
+//        if(elasticUrl != null){
+//            queryIndicesUrl = elasticUrl+"/_cat/indices?v";
+//        }
+        this.esclient = ElasticSearchHelper.getRestClientUtil();
 
     }
-    private String getHeader(String user,String password) {
-        String auth = user+":"+password;
-        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
-        return "Basic " + new String(encodedAuth);
-    }
+//    private String getHeader(String user,String password) {
+//        String auth = user+":"+password;
+//        byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
+//        return "Basic " + new String(encodedAuth);
+//    }
 
     /**
      * 定时执行的方法
      */
     public void scanIndex(){
-       if(elasticUrl == null){
-           logger.warn("Elastic Url is null.please check task config in org\\frameworkset\\task\\quarts-task.xml");
-           return;
-       }
+//       if(elasticUrl == null){
+//           logger.warn("Elastic Url is null.please check task config in org\\frameworkset\\task\\quarts-task.xml");
+//           return;
+//       }
 
         try {
            //获取所有的索引信息
 
-            String data = HttpRequestUtil.httpGetforString(queryIndicesUrl,head);
+//            String data = HttpRequestUtil.httpGetforString(queryIndicesUrl,head);
+        	String data = esclient.executeHttp("_cat/indices?v",esclient.HTTP_GET);
             logger.debug(data);
 
             if(SimpleStringUtil.isNotEmpty(data)){
@@ -58,11 +63,12 @@ public class EsscanTask {
                 List<ESIndice> indices = extractIndice(data,deadLine);
                 for(int i = 0; indices != null && i < indices.size(); i ++){
                     ESIndice deadESIndice = indices.get(i);
-                    String deleteIndiceUrl = elasticUrl + "/" + java.net.URLEncoder.encode(deadESIndice.getIndex(),"UTF-8") + "?pretty";
+//                    String deleteIndiceUrl = elasticUrl + "/" + java.net.URLEncoder.encode(deadESIndice.getIndex(),"UTF-8") + "?pretty";
                     try {
                     	//删除过期的索引数据
-                       String res = HttpRequestUtil.httpDelete(deleteIndiceUrl, head);
-                        logger.debug("deleteIndiceUrl:"+deleteIndiceUrl+","+res);
+//                       String res = HttpRequestUtil.httpDelete(deleteIndiceUrl, head);
+                    	String res = esclient.executeHttp(java.net.URLEncoder.encode(deadESIndice.getIndex(),"UTF-8") + "?pretty", esclient.HTTP_DELETE);
+                        logger.debug("deleteIndiceUrl:"+deadESIndice.getIndex()+","+res);
                     }
                     catch (Exception e) {
                         logger.error(e.getMessage(),e);
@@ -72,7 +78,7 @@ public class EsscanTask {
 
             
         } catch (Exception e) {
-            logger.error("elasticUrl:"+queryIndicesUrl,e);
+            logger.error("Scan Elastic Index failed:",e);
         }
     }
     public List<ESIndice> extractIndice(String data,Date deadLine) throws IOException {

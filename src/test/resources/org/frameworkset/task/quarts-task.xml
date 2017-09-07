@@ -61,11 +61,8 @@
 	</property>
 
 	<property name="EsscanTask" class="com.ai.elasticsearch.job.EsscanTask"
-			  f:dateformat="${elastic.dateformat}"
-			  f:elasticUrl="${elastic.url}"
-			  f:elasticDataLivetime="${elastic.data.livetime}"
-			  f:elasticUser="${elastic.user}"
-			  f:elasticPassword="${elastic.password}"
+			  f:dateformat="${elasticsearch.dateFormat}"			  
+			  f:elasticDataLivetime="${elastic.data.livetime}"			 
 			  init-method="init"/>
 	
 
