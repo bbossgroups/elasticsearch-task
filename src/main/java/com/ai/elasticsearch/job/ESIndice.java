@@ -14,6 +14,7 @@ public class ESIndice {
     private String health;
     private String status ;
     private String index;
+    private String indexName;
     private String uuid  ;
     private int pri ;
     private int rep ;
@@ -114,4 +115,12 @@ public class ESIndice {
     public void setGenDate(Date genDate) {
         this.genDate = genDate;
     }
+
+	public String getIndexName() {
+		return indexName;
+	}
+
+	public void setIndexName(String indexName) {
+		this.indexName = indexName;
+	}
 }
