@@ -14,11 +14,11 @@
 				<description> <![CDATA[ 指定序列化处理类，默认为kafka.serializer.DefaultEncoder,即byte[] ]]></description>
 			</property>-->
 
-			<property name="elasticsearch.rest.hostNames" value="${elasticsearch.rest.hostNames}">
+			<property name="elasticsearch.rest.hostNames" value="${elasticsearch.rest.hostNames:}">
 				<description> <![CDATA[ rest协议地址 ]]></description>
 			</property>
 
-			<property name="elasticsearch.transport.hostNames" value="${elasticsearch.transport.hostNames}">
+			<property name="elasticsearch.transport.hostNames" value="${elasticsearch.transport.hostNames:}">
 				<description> <![CDATA[ tcp协议地址 ]]></description>
 			</property>
 
