@@ -1,5 +1,12 @@
 package com.ai.elasticsearch.job;
 
+import com.frameworkset.util.SimpleStringUtil;
+import org.frameworkset.elasticsearch.ElasticSearchHelper;
+import org.frameworkset.elasticsearch.client.ClientUtil;
+import org.frameworkset.util.TimeUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -9,14 +16,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.frameworkset.elasticsearch.ElasticSearchHelper;
-import org.frameworkset.elasticsearch.client.ClientUtil;
-import org.frameworkset.util.TimeUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.frameworkset.util.SimpleStringUtil;
-
 public class EsscanTask {
     private static Logger logger = LoggerFactory.getLogger(EsscanTask.class);
     private String dateformat = "yyyy.MM.dd";
@@ -24,6 +23,7 @@ public class EsscanTask {
 //    private String queryIndicesUrl;
 //    private String elasticUrl;
     private  int elasticDataLivetime = 30;
+    private String elasticSearch;
     private ClientUtil esclient;
 //    private Map<String,String> head = new HashMap<>();
     public void init(){
@@ -33,7 +33,9 @@ public class EsscanTask {
 //        if(elasticUrl != null){
 //            queryIndicesUrl = elasticUrl+"/_cat/indices?v";
 //        }
-        this.esclient = ElasticSearchHelper.getRestClientUtil();
+		if(elasticSearch == null)
+			elasticSearch = ElasticSearchHelper.DEFAULT_SEARCH;
+		this.esclient = ElasticSearchHelper.getRestClientUtil(elasticSearch);
 
     }
 //    private String getHeader(String user,String password) {
@@ -53,7 +55,7 @@ public class EsscanTask {
 
         try {
            //获取所有的索引信息
-
+			logger.info("Elasticsearch Index ScanTask for "+elasticSearch + " begin....." );
 //            String data = HttpRequestUtil.httpGetforString(queryIndicesUrl,head);
         	String data = esclient.executeHttp("_cat/indices?v",esclient.HTTP_GET);
             logger.debug(data);
@@ -68,14 +70,14 @@ public class EsscanTask {
                     	//删除过期的索引数据
 //                       String res = HttpRequestUtil.httpDelete(deleteIndiceUrl, head);
                     	String res = esclient.executeHttp(java.net.URLEncoder.encode(deadESIndice.getIndex(),"UTF-8") + "?pretty", esclient.HTTP_DELETE);
-                        logger.debug("deleteIndiceUrl:"+deadESIndice.getIndex()+","+res);
+                        logger.info("deleteIndiceUrl for "+elasticSearch +":"+deadESIndice.getIndex()+","+res);
                     }
                     catch (Exception e) {
                         logger.error(e.getMessage(),e);
                     }
                 }
             }
-
+			logger.info("Elasticsearch Index ScanTask for "+elasticSearch + " end....." );
             
         } catch (Exception e) {
             logger.error("Scan Elastic Index failed:",e);
@@ -219,4 +221,12 @@ public class EsscanTask {
     public void setDateformat(String dateformat) {
         this.dateformat = dateformat;
     }
+
+	public String getElasticSearch() {
+		return elasticSearch;
+	}
+
+	public void setElasticSearch(String elasticSearch) {
+		this.elasticSearch = elasticSearch;
+	}
 }

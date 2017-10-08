@@ -1,56 +1,83 @@
 <properties>
 	<config file="elastic.properties"/>
-	<property name="elasticsearchPropes">
+	<property name="elasticsearchPropes239">
 		<propes>
  
-			<property name="elasticUser" value="${elasticUser:}">
+			<property name="elasticUser" value="${elasticUser.239:}">
 				<description> <![CDATA[ 认证用户 ]]></description>
 			</property>
 
-			<property name="elasticPassword" value="${elasticPassword:}">
+			<property name="elasticPassword" value="${elasticPassword.239:}">
 				<description> <![CDATA[ 认证口令 ]]></description>
 			</property>
 			<!--<property name="elasticsearch.hostNames" value="${elasticsearch.hostNames}">
 				<description> <![CDATA[ 指定序列化处理类，默认为kafka.serializer.DefaultEncoder,即byte[] ]]></description>
 			</property>-->
 
-			<property name="elasticsearch.rest.hostNames" value="${elasticsearch.rest.hostNames:}">
+			<property name="elasticsearch.rest.hostNames" value="${elasticsearch.239.rest.hostNames:}">
 				<description> <![CDATA[ rest协议地址 ]]></description>
 			</property>
 
-			<property name="elasticsearch.transport.hostNames" value="${elasticsearch.transport.hostNames:}">
+			<property name="elasticsearch.transport.hostNames" value="${elasticsearch.239.transport.hostNames:}">
 				<description> <![CDATA[ tcp协议地址 ]]></description>
 			</property>
 
-			<property name="elasticsearch.clusterName" value="${elasticsearch.clusterName:}">
+			<property name="elasticsearch.clusterName" value="${elasticsearch.239.clusterName:}">
 				<description> <![CDATA[ es集群名称]]></description>
 			</property>
-			<property name="elasticsearch.dateFormat" value="${elasticsearch.dateFormat}">
+			<property name="elasticsearch.dateFormat" value="${elasticsearch.239.dateFormat}">
 				<description> <![CDATA[ 索引日期格式]]></description>
 			</property>
-			<property name="elasticsearch.timeZone" value="${elasticsearch.timeZone:}">
+			<property name="elasticsearch.timeZone" value="${elasticsearch.239.timeZone:}">
 				<description> <![CDATA[ 时区信息]]></description>
 			</property>
-			<property name="elasticsearch.indexName" value="${elasticsearch.indexName:}">
-				<description> <![CDATA[ 默认索引名称]]></description>
-			</property>
-			<property name="elasticsearch.indexType" value="${elasticsearch.indexType:}">
-				<description> <![CDATA[ 默认索引类型]]></description>
-			</property>
-			<property name="elasticsearch.ttl" value="${elasticsearch.ttl:}">
-				<description> <![CDATA[ ms(毫秒) s(秒) m(分钟) h(小时) d(天) w(星期)]]></description>
-			</property>
 
-
-			<property name="elasticsearch.serialize" value="${elasticsearch.serialize:}">
-				<description> <![CDATA[ elasticsearch.serializer=org.frameworkset.elasticsearch.ElasticSearchJSONEventSerializer]]></description>
-			</property>
 		</propes>
 	</property>
-	<property name="elasticSearch"
+	<property name="elasticSearch239"
 			  class="org.frameworkset.elasticsearch.ElasticSearch"
 			  init-method="configure"
 			  destroy-method="stop"
-			  f:elasticsearchPropes="attr:elasticsearchPropes"/>
+			  f:elasticsearchPropes="attr:elasticsearchPropes239"/>
+
+	<property name="elasticsearchPropes51">
+		<propes>
+
+			<property name="elasticUser" value="${elasticUser.51:}">
+				<description> <![CDATA[ 认证用户 ]]></description>
+			</property>
+
+			<property name="elasticPassword" value="${elasticPassword.51:}">
+				<description> <![CDATA[ 认证口令 ]]></description>
+			</property>
+			<!--<property name="elasticsearch.hostNames" value="${elasticsearch.hostNames}">
+				<description> <![CDATA[ 指定序列化处理类，默认为kafka.serializer.DefaultEncoder,即byte[] ]]></description>
+			</property>-->
+
+			<property name="elasticsearch.rest.hostNames" value="${elasticsearch.51.rest.hostNames:}">
+				<description> <![CDATA[ rest协议地址 ]]></description>
+			</property>
+
+			<property name="elasticsearch.transport.hostNames" value="${elasticsearch.51.transport.hostNames:}">
+				<description> <![CDATA[ tcp协议地址 ]]></description>
+			</property>
+
+			<property name="elasticsearch.clusterName" value="${elasticsearch.51.clusterName:}">
+				<description> <![CDATA[ es集群名称]]></description>
+			</property>
+			<property name="elasticsearch.dateFormat" value="${elasticsearch.51.dateFormat}">
+				<description> <![CDATA[ 索引日期格式]]></description>
+			</property>
+			<property name="elasticsearch.timeZone" value="${elasticsearch.51.timeZone:}">
+				<description> <![CDATA[ 时区信息]]></description>
+			</property>
+
+		</propes>
+	</property>
+	<property name="elasticSearch51"
+			  class="org.frameworkset.elasticsearch.ElasticSearch"
+			  init-method="configure"
+			  destroy-method="stop"
+			  f:elasticsearchPropes="attr:elasticsearchPropes51"/>
 
 </properties>
