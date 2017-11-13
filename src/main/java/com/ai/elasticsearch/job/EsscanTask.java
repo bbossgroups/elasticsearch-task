@@ -2,7 +2,7 @@ package com.ai.elasticsearch.job;
 
 import com.frameworkset.util.SimpleStringUtil;
 import org.frameworkset.elasticsearch.ElasticSearchHelper;
-import org.frameworkset.elasticsearch.client.ClientUtil;
+import org.frameworkset.elasticsearch.client.ClientInterface;
 import org.frameworkset.util.TimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public class EsscanTask {
 //    private String elasticUrl;
     private  int elasticDataLivetime = 30;
     private String elasticSearch;
-    private ClientUtil esclient;
+    private ClientInterface esclient;
 //    private Map<String,String> head = new HashMap<>();
     public void init(){
         //Authorization
