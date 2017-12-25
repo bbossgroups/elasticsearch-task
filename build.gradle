@@ -117,15 +117,11 @@ configure(allprojects) { project ->
 
 	dependencies {
 		testCompile 'junit:junit:4.12'
-		//compile 'net.sf.json-lib:json-lib:2.4-jdk15'
-		//compile 'org.elasticsearch.client:x-pack-transport:5.4.2'
+
 		compile(
 
 				[group: 'com.bbossgroups', name: 'bboss-schedule', version: "${bboss_version}", transitive: true],
 				[group: 'com.bbossgroups.plugins', name: 'bboss-elasticsearch-rest', version: "${bboss_es_version}", transitive: true],
-				[group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: "${jacksonversion}",transitive: false],
-				[group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: "${jacksonversion}",transitive: false],
-				[group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "${jacksonversion}",transitive: false],
 		)
 		runtime(
 				[group: 'com.bbossgroups', name: 'bboss-rt', version: "${bboss_version}", transitive: false],
