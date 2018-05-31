@@ -4,16 +4,14 @@
 
 #作业配置
 修改resources/application.properties文件
-##elastic 集群名称，不是集群则注释即可
-elasticsearch.clusterName=elk542-bigdata
-## elasticsearch服务器地址
-### tcp协议配置，集群需要配置多个，单机只需配置一个即可
-elasticsearch.transport.hostNames=10.1.236.85:9300,10.1.236.88:9300,10.1.236.86:9300
+
+## elasticsearch服务器地址，多个集群配置，参考application.properties配置文件内容，主要的配置内容如下
+
 ### rest协议配置，集群需要配置多个，单机只需配置一个即可
 elasticsearch.rest.hostNames=10.1.236.85:9200,10.1.236.88:9200,10.1.236.86:9200
-## elasticsearch访问账号，没有则配置为空
+## elasticsearch访问账号，没有则配置为空，开启x-pack认证机制情况下有用
 elasticUser=elastic
-## elasticsearch访问口令，没有则配置为空
+## elasticsearch访问口令，没有则配置为空，开启x-pack认证机制情况下有用
 elasticPassword=changeme
 ##数据有效期,以天为单位
 elastic.data.livetime=30
