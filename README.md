@@ -1,11 +1,11 @@
-#定期清理es索引数据
+# 定期清理es索引数据
 基于quartz 2.3.0，定期清理es索引数据，支持多个elasticsearch集群数据清理
 
 
-#作业配置
+# 作业配置
 修改resources/application.properties文件
 
-## elasticsearch服务器地址，多个集群配置，参考application.properties配置文件内容，主要的配置内容如下
+## elasticsearch服务器地址，支持多个集群配置，参考application.properties配置文件内容，主要的配置内容如下
 
 ### rest协议配置，集群需要配置多个，单机只需配置一个即可
 elasticsearch.rest.hostNames=10.1.236.85:9200,10.1.236.88:9200,10.1.236.86:9200
