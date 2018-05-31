@@ -1,8 +1,9 @@
 #定期清理es索引数据
-基于quartz 2.3.0，定期清理es索引数据
+基于quartz 2.3.0，定期清理es索引数据，支持多个elasticsearch集群数据清理
+
 
 #作业配置
-修改resources/elastic.properties文件
+修改resources/application.properties文件
 ##elastic 集群名称，不是集群则注释即可
 elasticsearch.clusterName=elk542-bigdata
 ## elasticsearch服务器地址
