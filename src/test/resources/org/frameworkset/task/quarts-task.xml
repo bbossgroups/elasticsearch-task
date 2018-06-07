@@ -2,7 +2,7 @@
 	任务调度
 -->
 <properties>
-	<config file="elastic.properties"/>
+	<config file="application.properties"/>
 	<property name="quartz.config">
 		<map>
 			<property name="org.quartz.scheduler.instanceName" value="DefaultQuartzScheduler111" />
@@ -52,13 +52,13 @@
 					<property name="workbroker239" jobid="workbroker239"
 							  bean-name="EsscanTask239"
 							  method="scanIndex"
-						cronb_time="${elastic.239.crontime}" used="true"
+						cronb_time="${elasticSearch239.crontime}" used="true"
 						shouldRecover="false"
 						/>
 					<property name="workbroker51" jobid="workbroker51"
 							  bean-name="EsscanTask51"
 							  method="scanIndex"
-							  cronb_time="${elastic.51.crontime}" used="true"
+							  cronb_time="${elasticsearch51.crontime}" used="true"
 							  shouldRecover="false"
 					/>
 				</list>
@@ -67,15 +67,15 @@
 	</property>
 
 	<property name="EsscanTask239" class="com.ai.elasticsearch.job.EsscanTask"
-			  f:dateformat="${elasticsearch.239.dateFormat}"
-			  f:elasticDataLivetime="${elastic.239.data.livetime}"
+			  f:dateformat="${elasticSearch239.elasticsearch.dateFormat}"
+			  f:elasticDataLivetime="${elasticSearch239.data.livetime}"
 			  f:elasticSearch="elasticSearch239"
 			  init-method="init"/>
 
 	<property name="EsscanTask51" class="com.ai.elasticsearch.job.EsscanTask"
-			  f:dateformat="${elasticsearch.51.dateFormat}"
-			  f:elasticDataLivetime="${elastic.51.data.livetime}"
-			  f:elasticSearch="elasticSearch51"
+			  f:dateformat="${elasticsearch51.elasticsearch.dateFormat}"
+			  f:elasticDataLivetime="${elasticsearch51.data.livetime}"
+			  f:elasticSearch="elasticsearch51"
 			  init-method="init"/>
 
 </properties>
