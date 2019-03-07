@@ -49,23 +49,33 @@
 					parameter:设置任务执行的参数，name标识参数名称，value指定参数的值
 				-->
 				<list>
-					<property name="workbroker199" jobid="workbroker199"
-							  bean-name="EsscanTask199"
+					<property name="workbroker239" jobid="workbroker239"
+							  bean-name="EsscanTask239"
 							  method="scanIndex"
-						cronb_time="${elasticSearch199.crontime}" used="true"
+						cronb_time="${elasticSearch239.crontime}" used="true"
 						shouldRecover="false"
 						/>
-
+					<property name="workbroker51" jobid="workbroker51"
+							  bean-name="EsscanTask51"
+							  method="scanIndex"
+							  cronb_time="${elasticsearch51.crontime}" used="true"
+							  shouldRecover="false"
+					/>
 				</list>
 			</property>
 		</list>
 	</property>
 
-	<property name="EsscanTask199" class="com.ai.elasticsearch.job.EsscanTask"
-			  f:dateformat="${elasticSearch199.elasticsearch.dateFormat}"
-			  f:elasticDataLivetime="${elasticSearch199.data.livetime}"
-			  f:elasticSearch="elasticSearch199"
+	<property name="EsscanTask239" class="com.ai.elasticsearch.job.EsscanTask"
+			  f:dateformat="${elasticSearch239.elasticsearch.dateFormat}"
+			  f:elasticDataLivetime="${elasticSearch239.data.livetime}"
+			  f:elasticSearch="elasticSearch239"
 			  init-method="init"/>
 
+	<property name="EsscanTask51" class="com.ai.elasticsearch.job.EsscanTask"
+			  f:dateformat="${elasticsearch51.elasticsearch.dateFormat}"
+			  f:elasticDataLivetime="${elasticsearch51.data.livetime}"
+			  f:elasticSearch="elasticsearch51"
+			  init-method="init"/>
 
 </properties>
