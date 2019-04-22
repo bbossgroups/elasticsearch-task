@@ -66,13 +66,13 @@
 		</list>
 	</property>
 
-	<property name="EsscanTask239" class="com.ai.elasticsearch.job.EsscanTask"
+	<property name="EsscanTask239" class="org.frameworkset.elasticsearch.job.EsscanTask"
 			  f:dateformat="${elasticSearch239.elasticsearch.dateFormat}"
 			  f:elasticDataLivetime="${elasticSearch239.data.livetime}"
 			  f:elasticSearch="elasticSearch239"
 			  init-method="init"/>
 
-	<property name="EsscanTask51" class="com.ai.elasticsearch.job.EsscanTask"
+	<property name="EsscanTask51" class="org.frameworkset.elasticsearch.job.EsscanTask"
 			  f:dateformat="${elasticsearch51.elasticsearch.dateFormat}"
 			  f:elasticDataLivetime="${elasticsearch51.data.livetime}"
 			  f:elasticSearch="elasticsearch51"

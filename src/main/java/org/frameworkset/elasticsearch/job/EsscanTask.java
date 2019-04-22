@@ -1,4 +1,4 @@
-package com.ai.elasticsearch.job;
+package org.frameworkset.elasticsearch.job;
 
 import com.frameworkset.util.SimpleStringUtil;
 import org.frameworkset.elasticsearch.ElasticSearchHelper;

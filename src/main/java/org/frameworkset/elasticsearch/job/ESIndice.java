@@ -1,4 +1,4 @@
-package com.ai.elasticsearch.job;
+package org.frameworkset.elasticsearch.job;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
