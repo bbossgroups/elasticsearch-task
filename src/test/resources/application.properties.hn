@@ -11,7 +11,6 @@ elasticSearch239.elasticsearch.rest.hostNames=100.154.50.239:9200,100.154.50.239
 #elasticsearch.rest.hostNames=100.180.211.27:9280,100.180.211.27:9281,100.180.211.27:9282
 elasticSearch239.elasticsearch.dateFormat=yyyy.MM.dd
 elasticSearch239.elasticsearch.timeZone=Asia/Shanghai
-elasticSearch239.elasticsearch.ttl=2d
 #在控制台输出脚本调试开关showTemplate,false关闭，true打开，同时log4j至少是info级别
 elasticSearch239.elasticsearch.showTemplate=true
 elasticSearch239.elasticsearch.discoverHost=false
@@ -47,7 +46,6 @@ elasticsearch51.elasticsearch.rest.hostNames=100.154.73.91:9200,100.154.73.92:92
 #elasticsearch.rest.hostNames=100.180.211.27:9280,100.180.211.27:9281,100.180.211.27:9282
 elasticsearch51.elasticsearch.dateFormat=yyyy.MM.dd
 elasticsearch51.elasticsearch.timeZone=Asia/Shanghai
-elasticsearch51.elasticsearch.ttl=2d
 #在控制台输出脚本调试开关showTemplate,false关闭，true打开，同时log4j至少是info级别
 elasticsearch51.elasticsearch.showTemplate=true
 elasticsearch51.elasticsearch.discoverHost=false
