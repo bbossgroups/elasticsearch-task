@@ -1,5 +1,5 @@
-
-
+def profile = System.getProperty("profile") ?: "dev"
+println(profile)
 
 configure(allprojects) { project ->
 	group = PROJ_GROUP
@@ -86,17 +86,26 @@ configure(allprojects) { project ->
 		testClasses.enabled = false
 		test.enabled = false
 	}
-
 	sourceSets {
 		main {
 			java {
 				srcDir 'src/main/java'
 
 			}
-			resources {
-				srcDir 'src/main/resources'
-				srcDir 'src/main/java'  exclude '**/*.java'
+			if(profile == "dev") {
+				resources {
+					srcDir 'src/main/resources'
+					srcDir 'src/main/java' exclude '**/*.java'
+				}
 			}
+			else{
+				resources {
+					srcDir 'src/main/resources' exclude '**/*'
+					srcDir 'src/main/java' exclude '**/*.java'
+				}
+			}
+
+
 //			compileClasspath = configurations.compile + configurations.runtime
 		}
 		test {
@@ -162,7 +171,7 @@ configure(allprojects) { project ->
 
 	}
 	task copyResourcesfiles(type: Sync )  {
-		from fileTree(dir: 'src/test/resources')
+		from fileTree(dir: 'src/main/resources')
 		filteringCharset = 'UTF-8'
 		into 'build/dist/resources'
 	}
