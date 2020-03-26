@@ -71,3 +71,6 @@ elasticsearch51.http.keyPassword =
 elasticsearch51.http.hostnameVerifier =
 elasticsearch51.crontime=0 0 0/8 * * ?
 elasticsearch51.data.livetime=25
+
+mainclass=org.frameworkset.elasticsearch.job.Main
+pidfile=elktask.pid
