@@ -3,6 +3,7 @@ package org.frameworkset.elasticsearch.job;
 import com.frameworkset.util.SimpleStringUtil;
 import org.frameworkset.elasticsearch.ElasticSearchHelper;
 import org.frameworkset.elasticsearch.client.ClientInterface;
+import org.frameworkset.elasticsearch.entity.ESIndice;
 import org.frameworkset.util.TimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -128,7 +129,7 @@ public class EsscanTask {
 
     }
     
-    private ESIndice buildESIndice(String line,SimpleDateFormat format)
+    private ESIndice buildESIndice(String line, SimpleDateFormat format)
     {
     	StringBuilder token = new StringBuilder();
         ESIndice esIndice = new ESIndice();
